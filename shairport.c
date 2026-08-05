@@ -2672,15 +2672,14 @@ int main(int argc, char **argv) {
 
 #endif
 
-#ifdef CONFIG_AIRPLAY_2
-  if (config.service_type == APST_airplay2) {
-    config.port = 7000;
-  } else {
+  if (config.port == 0) {
     config.port = 5000;
-  }
-#else
-  config.port = 5000;
+#ifdef CONFIG_AIRPLAY_2
+    if (config.service_type == APST_airplay2) {
+      config.port = 7000;
+    }
 #endif
+  } else { /*User configured port*/ }
 
 #ifdef CONFIG_AIRPLAY_2
   if (config.service_type == APST_airplay2) {
